@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
-import './App.css';
-import Nasa from './components/NasaPhoto'
+import "./App.css";
+import Nasa from "./NasaPhoto";
 
 function App() {
-  return (
-    <div className="App">
-     <Nasa />
-    </div>
-  );
+	return (
+		<div className="App">
+			<Nasa />
+		</div>
+	);
 }
 
 export default App;
