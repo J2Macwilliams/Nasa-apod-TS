@@ -14,36 +14,36 @@ interface NasaNode {
 
 const NasaPhoto: React.FC = () => {
 	const [nasa, setNasa] = useState<NasaNode>({ title: "", photo: "", hdurl: "" });
-	const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10));
-
+	const [selectedDate, setSelectedDate] = useState<any>(new Date());
+	var chosen = selectedDate.toISOString().slice(0,10);
+	
 	const handleDateChange = (date: any) => {
-		var choice = date?.toISOString().slice(0, 10);
-		setSelectedDate(choice);
+		setSelectedDate(date);
 	};
 
 	useEffect(() => {
 		axios
 			.get(
-				`https://api.nasa.gov/planetary/apod?api_key=juqFK0XMHkuJYbg0mJM66eF31hMsRNrxhU2Mjhfo&date=${selectedDate}`
+				`https://api.nasa.gov/planetary/apod?api_key=juqFK0XMHkuJYbg0mJM66eF31hMsRNrxhU2Mjhfo&date=${chosen}`
 			)
 			.then((response) => {
 				setNasa(response.data);
 			});
-	}, [selectedDate]);
+	}, [chosen]);
 
 	return (
 		<>
 			<Container img={nasa.hdurl}>
 				<Header>
-					<Logo src={nasaLogo} className="logo" alt="Nasa's logo" />
+					<Logo src={nasaLogo} className='logo' alt="Nasa's logo" />
 					<h2>Photo of the Day</h2>
 					<MuiPickersUtilsProvider utils={DateFnsUtils}>
 						<KeyboardDatePicker
-							margin="normal"
-							id="date-picker-dialog"
-							className="mui-cal"
-							label="Date picker dialog"
-							format="MM/dd/yyyy"
+							margin='normal'
+							id='date-picker-dialog'
+							className='mui-cal'
+							label='Date picker dialog'
+							format='MM/dd/yyyy'
 							value={selectedDate}
 							onChange={handleDateChange}
 							KeyboardButtonProps={{
